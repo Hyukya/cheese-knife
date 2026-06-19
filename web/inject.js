@@ -209,7 +209,7 @@
     let info = liveInfo[uid];
     if (info === undefined) {
       const res = await fetch(
-        `https://api.chzzk.naver.com/service/v3.2/channels/${uid}/live-detail`,
+        `https://api.chzzk.naver.com/service/v3.3/channels/${uid}/live-detail`,
         { credentials: "include" }
       );
       if (!res.ok) {
@@ -309,7 +309,7 @@
       info.liveImageUrl ||
       info.livePlayback?.thumbnail?.snapshotThumbnailTemplate ||
       (info.adult
-        ? "https://ssl.pstatic.net/static/nng/glive/resource/p/static/media/image_age_restriction.3ef1507fcf16665ace28.png"
+        ? "https://ssl.pstatic.net/static/nng/glive/image/age_restriction_large_dark.png"
         : "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
     ).replace("{type}", 480);
 
