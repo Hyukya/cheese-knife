@@ -191,11 +191,7 @@
   const loadHls = () => new Promise((resolve) => {
     if (hlsLib != null) return resolve(hlsLib);
     if (typeof Hls !== 'undefined') { hlsLib = Hls; return resolve(hlsLib); }
-    const s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js';
-    s.onload = () => { hlsLib = Hls; resolve(hlsLib); };
-    s.onerror = () => resolve(null);
-    document.head.appendChild(s);
+    resolve(null);
   });
   // 페이지 로드 즉시 HLS.js 프리로드
   loadHls();
