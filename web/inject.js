@@ -600,7 +600,7 @@
         const rect = item.getBoundingClientRect();
         e.dataTransfer.effectAllowed = "copy";
         e.dataTransfer.setDragImage(
-          item.className.startsWith("navigator_item_link__")
+          (item.className.startsWith("navigator_item_link__") || item.className.includes("_item_link_"))
             ? item.parentElement
             : item,
           e.clientX - rect.x,
@@ -633,7 +633,7 @@
     const getHref = (el) =>
       el.tagName === "A"
         ? el.href
-        : el.querySelector('a[class^="navigator_item_link__"]')?.href;
+        : (el.querySelector('a[class^="navigator_item_link__"]') || el.querySelector('a[class*="_item_link_"]'))?.href;
 
     const sidebarObserver = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
@@ -646,7 +646,7 @@
             addListeners(item);
           }
 
-          if (n.className.startsWith?.("navigator_tooltip__")) {
+          if (n.className.startsWith?.("navigator_tooltip__") || (n.className.includes?.("_tooltip_") && !n.className.includes?.("_tooltip_inner_"))) {
             const href = getHref(mutation.target);
             if (config.preview && href) {
               showPreview(href, n, true);
@@ -654,7 +654,7 @@
           }
         }
         for (const n of mutation.removedNodes) {
-          if (n.className?.startsWith?.("navigator_tooltip__")) {
+          if (n.className?.startsWith?.("navigator_tooltip__") || (n.className?.includes?.("_tooltip_") && !n.className?.includes?.("_tooltip_inner_"))) {
             const href = getHref(mutation.target);
             if (href) {
               hidePreview(href);
