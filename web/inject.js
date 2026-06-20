@@ -707,7 +707,7 @@
         path.startsWith("/video/")
       ) {
         return attachVodObserver(node);
-      } else if (node.className.startsWith?.("channel_")) {
+      } else if (node.className.startsWith?.("channel_") || path.split("/").length === 2) {
         return initChannelFeatures(node);
       }
     };
@@ -745,7 +745,7 @@
   };
 
   const initChannelFeatures = async (node) => {
-    const list = node.querySelector('[class*="channel_area__"]');
+    const list = node.querySelector('[class*="channel_area__"]') || node.querySelector('[role="tablist"]');
     if (list == null) {
       return;
     }
